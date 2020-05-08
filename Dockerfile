@@ -1,6 +1,6 @@
 FROM strusfr/docker-ubuntu1604-slurmbase
 
-RUN apt-get update -y
+RUN add-apt-repository universe && apt-get update -y
 RUN apt-get install -y git golang-bin make golang-github-prometheus-client-golang-dev
 
 RUN git clone https://github.com/vpenso/prometheus-slurm-exporter.git \
