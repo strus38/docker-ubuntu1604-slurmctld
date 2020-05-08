@@ -1,7 +1,14 @@
 FROM strusfr/docker-ubuntu1604-slurmbase
 
 RUN add-apt-repository universe && apt-get update -y && apt-cache search prometheus
-RUN apt-get install -y git golang-bin golang-github-prometheus-common-dev golang-prometheus-client-dev
+RUN curl https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz | tar xvzf - -C /usr/local --strip-components=1
+
+# Set environment variables.
+ENV GOROOT /usr/local
+ENV GOPATH /usr/local/go
+ENV PATH $PATH:/usr/local/go/bin
+
+RUN apt-get install -y git golang-github-prometheus-common-dev golang-prometheus-client-dev
 
 RUN git clone https://github.com/vpenso/prometheus-slurm-exporter.git \
     && cd prometheus-slurm-exporter \
