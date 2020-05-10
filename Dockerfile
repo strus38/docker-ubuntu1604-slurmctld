@@ -15,8 +15,8 @@ RUN which go
 RUN git clone https://github.com/vpenso/prometheus-slurm-exporter.git \
     && cd prometheus-slurm-exporter \
     && make build \
-    && cp bin/prometheus-slurm-exporter /usr/local/bin/prometheus-slurm-exporter \
-    && chmod 755 /usr/local/bin/prometheus-slurm-exporter
+    && cp bin/prometheus-slurm-exporter /usr/local/sbin/prometheus-slurm-exporter \
+    && chmod 755 /usr/local/sbin/prometheus-slurm-exporter
 
 RUN mkdir -p /var/spool/slurmctld \
     && chmod 755 /var/spool/slurmctld
