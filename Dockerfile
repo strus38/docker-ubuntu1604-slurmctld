@@ -6,19 +6,16 @@ FROM strusfr/docker-ubuntu1604-slurmbase
 # Set environment variables.
 #ENV GOROOT /usr/local
 #ENV GOPATH /usr/local/go
-#ENV PATH $PATH:/usr/local/go/bin:/usr/local/bin
+ENV PATH $PATH:/usr/local/go/bin:/usr/local/bin
 
 RUN add-apt-repository universe && apt-get update -y && apt-cache search golang-github
 RUN apt-get install -y golang-github-prometheus-client-golang-dev git build-essential golang
-RUN which go
-# Copy all slurm commands in /usr/bin ... otherwise prometheus exprter won't work.
-RUN cp /usr/local/bin/s* /usr/bin/.
 
 RUN git clone https://github.com/vpenso/prometheus-slurm-exporter.git \
     && cd prometheus-slurm-exporter \
     && make build \
-    && cp bin/prometheus-slurm-exporter /usr/bin/prometheus-slurm-exporter \
-    && chmod 755 /usr/bin/prometheus-slurm-exporter
+    && cp bin/prometheus-slurm-exporter /usr/local/bin/prometheus-slurm-exporter \
+    && chmod 755 /usr/local/bin/prometheus-slurm-exporter
 
 RUN mkdir -p /var/spool/slurmctld \
     && chmod 755 /var/spool/slurmctld
