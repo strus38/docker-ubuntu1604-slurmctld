@@ -9,7 +9,7 @@ FROM strusfr/docker-ubuntu1604-slurmbase
 ENV PATH $PATH:/usr/local/go/bin:/usr/local/bin
 
 RUN add-apt-repository universe && apt-get update -y && apt-cache search golang-github
-RUN apt-get install -y golang-github-prometheus-client-golang-dev git build-essential golang
+RUN apt-get install -y golang-github-prometheus-client-golang-dev git build-essential golang chronyd
 
 RUN git clone https://github.com/vpenso/prometheus-slurm-exporter.git \
     && cd prometheus-slurm-exporter \
